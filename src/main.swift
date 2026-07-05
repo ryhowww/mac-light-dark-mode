@@ -32,8 +32,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func updateIcon() {
         guard let button = statusItem.button else { return }
-        // Show the symbol for the mode you'll switch *to*, like a light switch.
-        let symbol = isDark ? "sun.max.fill" : "moon.fill"
+        // Half-filled circle flips with the current appearance.
+        let symbol = isDark ? "circle.righthalf.filled" : "circle.lefthalf.filled"
         let image = NSImage(systemSymbolName: symbol, accessibilityDescription: "Toggle appearance")
         image?.isTemplate = true
         button.image = image

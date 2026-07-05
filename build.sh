@@ -15,7 +15,10 @@ swiftc -O \
     -o "$MACOS/LightDarkMode" \
     "$DIR/src/main.swift"
 
-# Ad-hoc signature so the one-time Automation permission stays tied to a stable identity.
+# Ad-hoc signature. NOTE: this changes on every rebuild, so macOS re-asks for the
+# Automation permission after each build — click Allow on the prompt at first toggle.
+# If the toggle silently stops working (prompt was dismissed/denied), reset with:
+#   tccutil reset AppleEvents com.ryhowww.lightdarkmode
 codesign --force --sign - "$APP"
 
 echo "Built $APP"

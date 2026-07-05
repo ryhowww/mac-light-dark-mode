@@ -16,8 +16,9 @@ bar, and the icon shows you which mode you're currently in.
 - Lives only in the menu bar (no Dock icon, no window).
 - Left-click the icon toggles the system between Light and Dark.
 - Right-click opens a small menu: Toggle Light / Dark, and Quit.
-- The icon reflects the current mode: a moon while you're in Light, a sun while
-  you're in Dark, so it always shows the mode you'll switch to.
+- The icon is a half-filled circle that flips sides with the current mode, so you
+  can see at a glance which appearance is active. (It deliberately avoids the
+  crescent-moon symbol, which looks identical to the macOS Focus indicator.)
 - Stays in sync if you change appearance some other way (Control Center, Settings).
 
 ## Requirements
@@ -33,9 +34,16 @@ That compiles the app into `~/Applications/Light Dark Mode.app`. Open it from th
 
 ## First run
 
-Left-click the menu-bar icon once and approve the one-time prompt asking to control
-System Events. That permission is what lets the app flip the appearance. You only
-grant it once.
+Left-click the menu-bar icon once and approve the prompt asking to control System
+Events. That permission is what lets the app flip the appearance.
+
+Because the build is ad-hoc signed, the signature changes every time you rebuild,
+and macOS asks for that permission again after each `./build.sh`. If the toggle
+ever silently stops working (the prompt was dismissed or denied), reset it with:
+
+    tccutil reset AppleEvents com.ryhowww.lightdarkmode
+
+then relaunch the app and approve the prompt on the next click.
 
 ## Start it on login (optional)
 
